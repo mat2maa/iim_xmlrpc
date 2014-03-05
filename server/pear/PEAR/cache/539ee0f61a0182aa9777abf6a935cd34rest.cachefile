@@ -1,0 +1,12 @@
+a:14:{s:7:"attribs";a:4:{s:5:"xmlns";s:36:"http://pear.php.net/dtd/rest.release";s:9:"xmlns:xsi";s:41:"http://www.w3.org/2001/XMLSchema-instance";s:11:"xmlns:xlink";s:28:"http://www.w3.org/1999/xlink";s:18:"xsi:schemaLocation";s:81:"http://pear.php.net/dtd/rest.release     http://pear.php.net/dtd/rest.release.xsd";}s:1:"p";a:2:{s:7:"attribs";a:1:{s:10:"xlink:href";s:20:"/rest/p/file_archive";}s:8:"_content";s:12:"File_Archive";}s:1:"c";s:12:"pear.php.net";s:1:"v";s:5:"1.5.5";s:2:"st";s:6:"stable";s:1:"l";s:4:"LGPL";s:1:"m";s:8:"doconnor";s:1:"s";s:94:"File_Archive will let you manipulate easily the tar, gz, tgz, bz2, tbz, zip, ar (or deb) files";s:1:"d";s:302:"This library is strongly object oriented. It makes it very easy to use, writing simple code, yet the library is very powerfull.
+It lets you easily read or generate tar, gz, tgz, bz2, tbz, zip, ar (or deb) archives to files, memory, mail or standard output.
+See http://poocl.la-grotte.org for a tutorial";s:2:"da";s:19:"2012-04-13 04:51:57";s:1:"n";s:345:"QA release
+Made bzip2 extension optional
+Bug #19108	upgrade PHPUnit require statements (for PEAR QA Team)
+Bug #17257	Corruupted zip file
+Bug #17046	AddDirectory.php calls parent constructor incorrectly
+Bug #14596	data read during tar import includes slashes
+
+Bug #14557	bz2 is optional, not required
+
+Request #6631	Host some tutorials on pearweb";s:1:"f";s:5:"62598";s:1:"g";s:42:"http://pear.php.net/get/File_Archive-1.5.5";s:1:"x";a:1:{s:7:"attribs";a:1:{s:10:"xlink:href";s:17:"package.1.5.5.xml";}}}

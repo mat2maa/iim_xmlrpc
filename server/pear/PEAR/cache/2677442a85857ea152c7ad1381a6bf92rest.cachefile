@@ -1,0 +1,5 @@
+a:14:{s:7:"attribs";a:4:{s:5:"xmlns";s:36:"http://pear.php.net/dtd/rest.release";s:9:"xmlns:xsi";s:41:"http://www.w3.org/2001/XMLSchema-instance";s:11:"xmlns:xlink";s:28:"http://www.w3.org/1999/xlink";s:18:"xsi:schemaLocation";s:81:"http://pear.php.net/dtd/rest.release     http://pear.php.net/dtd/rest.release.xsd";}s:1:"p";a:2:{s:7:"attribs";a:1:{s:10:"xlink:href";s:19:"/rest/p/php_archive";}s:8:"_content";s:11:"PHP_Archive";}s:1:"c";s:12:"pear.php.net";s:1:"v";s:6:"0.11.2";s:2:"st";s:5:"alpha";s:1:"l";s:11:"PHP License";s:1:"m";s:6:"cellog";s:1:"s";s:32:"Create and Use PHP Archive files";s:1:"d";s:86:"PHP_Archive allows you to create a single .phar file containing an entire application.";s:2:"da";s:19:"2007-08-18 13:07:36";s:1:"n";s:253:"major bugfix release
+* fix 64-bit/32-bit compatibility of phars (Brian Shire)
+* fix Bug #11858: seek to SEEK_END fails
+* fix Bug #11859: mapPhar fails for all phars internally loaded
+* fix Bug #11860: missing constant in PHP_Archive_Exception UNKNOWNSIG";s:1:"f";s:5:"82656";s:1:"g";s:42:"http://pear.php.net/get/PHP_Archive-0.11.2";s:1:"x";a:1:{s:7:"attribs";a:1:{s:10:"xlink:href";s:18:"package.0.11.2.xml";}}}
