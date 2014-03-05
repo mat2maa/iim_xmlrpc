@@ -41,8 +41,8 @@ function create_tracks_zip($app_id, $playlist, $albums, $tracks, $track_position
 {
   if (valid_app_id($app_id) == 0) {
     ini_set('max_execution_time', 0); //no limit
-    $zip_file = "/share/Qweb/zip/tracks/" . $playlist . ".zip";
-    $temp_folder = "/share/Qweb/zip/tracks/" . $playlist;
+    $zip_file = "/share/Qweb/zip/audio_playlists/" . $playlist . ".zip";
+    $temp_folder = "/share/Qweb/zip/audio_playlists/" . $playlist;
 
     if (file_exists($temp_folder)) {
       unlinkRecursive($temp_folder, true);
@@ -100,8 +100,8 @@ function create_albums_zip($app_id, $playlist, $albums, $tracks, $album_position
 {
   if (valid_app_id($app_id) == 0) {
     ini_set('max_execution_time', 0); //no limit
-    $zip_file = "/share/Qweb/zip/albums/" . $playlist . ".zip";
-    $temp_folder = "/share/Qweb/zip/albums/" . $playlist;
+    $zip_file = "/share/Qweb/zip/album_playlists/" . $playlist . ".zip";
+    $temp_folder = "/share/Qweb/zip/album_playlists/" . $playlist;
 
     if (file_exists($temp_folder)) {
       unlinkRecursive($temp_folder, true);
@@ -142,6 +142,124 @@ function create_albums_zip($app_id, $playlist, $albums, $tracks, $album_position
     } else {
       return $errors;
     }
+  } else {
+    return 0;
+  }
+}
+
+/**
+ * function create_album_zip($app_id, $album_id, $albums, $tracks) returns
+ * @param $app_id
+ * @param $album_id
+ * @param $albums
+ * @param $tracks
+ * @return array or integer
+ */
+function create_album_zip($app_id, $album_id, $albums, $tracks)
+{
+  if (valid_app_id($app_id) == 0) {
+    ini_set('max_execution_time', 0); //no limit
+    $zip_file = "/share/Qweb/zip/albums/" . $album_id . ".zip";
+    $temp_folder = "/share/Qweb/zip/albums/" . $album_id;
+
+    if (file_exists($temp_folder)) {
+      unlinkRecursive($temp_folder, true);
+    }
+
+    mkdir($temp_folder);
+
+    $files = array();
+    $errors = array();
+    $i = 0;
+    foreach ($tracks as $t) {
+
+      if (file_exists("/share/MD0_DATA/Qmultimedia/" . $albums[$i] . "/" . $t . ".mp3")) {
+        copy("/share/MD0_DATA/Qmultimedia/" . $albums[$i] . "/" . $t . ".mp3", $temp_folder . "/" . $album_id[$i] . ".mp3");
+        array_push($files, $temp_folder . "/" . $album_id[$i] . ".mp3");
+      } else {
+        $error = $albums[$i] . "/" . $t;
+        array_push($errors, $error);
+      }
+
+      $i++;
+    }
+
+    File_Archive::setOption("zipCompressionLevel", 0);
+
+    File_Archive::extract(
+      $files,
+      File_Archive::toArchive($zip_file, File_Archive::toFiles())
+    );
+
+    unlinkRecursive($temp_folder, true);
+
+    chmod($zip_file, 0755);
+
+    if (count($errors) == 0) {
+      return 1;
+    } else {
+      return $errors;
+    }
+  } else {
+    return 0;
+  }
+}
+
+/**
+ * function delete_tracks_zip($app_id, $playlist) returns
+ * @param $app_id
+ * @param $playlist
+ * @return integer
+ */
+function delete_tracks_zip($app_id, $playlist)
+{
+  if (valid_app_id($app_id) == 0) {
+    $zip_file = "/share/Qweb/zip/audio_playlists/" . $playlist . ".zip";
+
+    if (file_exists($zip_file)) {
+      unlink($zip_file);
+    }
+    return 1;
+  } else {
+    return 0;
+  }
+}
+
+/**
+ * function delete_albums_zip($app_id, $playlist) returns
+ * @param $app_id
+ * @param $playlist
+ * @return integer
+ */
+function delete_albums_zip($app_id, $playlist)
+{
+  if (valid_app_id($app_id) == 0) {
+    $zip_file = "/share/Qweb/zip/album_playlists/" . $playlist . ".zip";
+
+    if (file_exists($zip_file)) {
+      unlink($zip_file);
+    }
+    return 1;
+  } else {
+    return 0;
+  }
+}
+
+/**
+ * function delete_album_zip($app_id, $album_id) returns
+ * @param $app_id
+ * @param $album_id
+ * @return integer
+ */
+function delete_album_zip($app_id, $album_id)
+{
+  if (valid_app_id($app_id) == 0) {
+    $zip_file = "/share/Qweb/zip/albums/" . $album_id . ".zip";
+
+    if (file_exists($zip_file)) {
+      unlink($zip_file);
+    }
+    return 1;
   } else {
     return 0;
   }
@@ -215,6 +333,30 @@ $s = new xmlrpc_server(
       "function" => "create_albums_zip",
       "signature" => array(
         array($xmlrpcString, $xmlrpcString, $xmlrpcString, $xmlrpcArray, $xmlrpcArray, $xmlrpcArray)
+      )
+    ),
+    "create_album_zip" => array(
+      "function" => "create_album_zip",
+      "signature" => array(
+        array($xmlrpcString, $xmlrpcString, $xmlrpcString, $xmlrpcArray, $xmlrpcArray)
+      )
+    ),
+    "delete_tracks_zip" => array(
+      "function" => "delete_tracks_zip",
+      "signature" => array(
+        array($xmlrpcString, $xmlrpcString, $xmlrpcString)
+      )
+    ),
+    "delete_albums_zip" => array(
+      "function" => "delete_albums_zip",
+      "signature" => array(
+        array($xmlrpcString, $xmlrpcString, $xmlrpcString)
+      )
+    ),
+    "delete_album_zip" => array(
+      "function" => "delete_album_zip",
+      "signature" => array(
+        array($xmlrpcString, $xmlrpcString, $xmlrpcString)
       )
     ),
     "delete_album_folder" => array(
